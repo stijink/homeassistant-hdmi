@@ -1,3 +1,5 @@
+'use strict';
+
 const exec    = require('child_process').exec;
 const request = require('request');
 
@@ -5,7 +7,7 @@ var intervalId = null;
 
 const HdmiOffCmd  = '/opt/vc/bin/tvservice -o';
 const HdmiOnCmd   = '/opt/vc/bin/tvservice -p && sudo chvt 1 && sudo chvt 7';
-const HdmiTimeout = 60000 * 5; // 5 Minutes
+const HdmiTimeout = 60000 * 3; // 3 Minutes
 
 const homeassistantHost  = process.env.HA_HOST || null;
 const homeassistantToken = process.env.HA_TOKEN || null;
@@ -79,5 +81,5 @@ function turnHdmiOn()
   clearInterval(intervalId);
 
   // Turn off the HDMI Port after the time given in "HdmiTimeout"
-  HdmiTimeoutId = setTimeout(turnHdmiOff, HdmiTimeout);
+  setTimeout(turnHdmiOff, HdmiTimeout);
 }
